@@ -37,7 +37,7 @@ function updateSongTime() {
 async function getSongs(folder) {
     songs = []
     currfolder = folder
-    let a = await fetch(`/spotify_clone/${folder}/`);
+    let a = await fetch(`/${folder}/`);
     let response = await a.text();
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -75,7 +75,7 @@ async function getSongs(folder) {
 }  
   
 const playmusic = (track,pause = false) => {
-  currsong.src = `/spotify_clone/${currfolder}/${track}`;
+  currsong.src = `/${currfolder}/${track}`;
 
     if(!pause){
       currsong.play();
@@ -87,7 +87,7 @@ const playmusic = (track,pause = false) => {
 }
 
 async function displayAlbums(){
-    let a = await fetch("/spotify_clone/songs/");
+    let a = await fetch("/songs/");
     let response = await a.text();
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -98,7 +98,7 @@ async function displayAlbums(){
       if(e.href.includes("/songs")){
 
         let folder = e.href.split("/").slice(-2)[0]
-        let a = await fetch(`/spotify_clone/songs/${folder}/info.json`);
+        let a = await fetch(`/songs/${folder}/info.json`);
       let response = await a.json();
       console.log(response)
       let cardcontainer = document.querySelector(".cardcontainer")
@@ -121,7 +121,7 @@ async function displayAlbums(){
               </svg>
               </div>
               <img
-              src="/spotify_clone/songs/${folder}/cover.jpg"
+              src="/songs/${folder}/cover.jpg"
               alt=""
               />
               <h2>${response.title}</h2>
